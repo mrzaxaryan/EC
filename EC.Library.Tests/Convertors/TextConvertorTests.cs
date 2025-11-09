@@ -2,6 +2,8 @@ using EC.Library.Convertors;
 using EC.Library.Core;
 using Xunit;
 
+namespace EC.Library.Tests.Convertors;
+
 public class TextConvertorTests
 {
     [Fact]

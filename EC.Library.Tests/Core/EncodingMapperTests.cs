@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using Xunit;
 
+namespace EC.Library.Tests.Core;
+
 public class EncodingMapperTests
 {
     [Fact]
@@ -67,12 +69,12 @@ public class EncodingMapperTests
     {
         var lines = new[]
         {
-            "# comment",
-            "a = ?",
-            "b = !",
-            "  ",
-            "malformedline"
-        };
+        "# comment",
+        "a = ?",
+        "b = !",
+        "  ",
+        "malformedline"
+    };
         var file = Path.GetTempFileName();
         File.WriteAllLines(file, lines);
 
