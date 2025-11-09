@@ -3,23 +3,19 @@ using System.Text;
 
 namespace EC.Library.Convertors;
 
-public class TextConvertor(EncodingMapper encodingMap) 
+public class TextConvertor(EncodingMapper encodingMap)
 {
+
     public string Convert(string text, EncodingType encodingType)
     {
-        var stringBuilder = new StringBuilder(text.Length);
+        var result = new char[text.Length];
 
-        for (int i = 0; i < text.Length; i++)
+        Parallel.For(0, text.Length, i =>
         {
             char input = text[i];
+            result[i] = encodingMap.TryConvert(input, encodingType, out var converted) ? converted : input;
+        });
 
-            if (!encodingMap.TryConvert(input, encodingType, out var converted))
-                converted = input;
-
-            stringBuilder.Append(converted);
-
-        }
-
-        return stringBuilder.ToString();
+        return new string(result);
     }
 }
