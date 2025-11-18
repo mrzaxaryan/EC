@@ -9,9 +9,9 @@ The **Armenian Encoding Converter (EC)** is a .NET 9 application designed to fac
 ## Features
 
 - **Library (`EC.Library`)**:
-  - `TextConverter`: Convert text files between different Armenian encodings.
-  - `ExcelConverter`: Handle encoding conversions in Excel files.
-  - `WordConverter`: Process Word documents for encoding transformations.
+  - `TextConverter`: Converts text files between different Armenian encodings.
+  - `ExcelConverter`: Handles encoding conversions in Excel files.
+  - `WordConverter`: Processes Word documents for encoding transformations.
   - `EncodingMapper`: Core logic for mapping between encoding types.
   - `EncodingType`: Enumeration of supported encoding types.
 
