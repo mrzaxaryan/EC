@@ -57,7 +57,9 @@ internal class Program
 
         try
         {
-            var encodingMapper = EncodingMapper.FromFile(@"..\..\..\..\Encodings\armenian.map");
+            var baseDir = AppContext.BaseDirectory;
+            var mapPath = Path.Combine(baseDir, "Encodings", "armenian.map");
+            var encodingMapper = EncodingMapper.FromFile(mapPath);
             var textConverter = new TextConverter(encodingMapper);
             using var wordConverter = new WordConverter(textConverter, true);
             using var excelConverter = new ExcelConverter(textConverter, true);
