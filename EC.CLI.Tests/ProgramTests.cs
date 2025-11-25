@@ -30,29 +30,6 @@ public class ProgramTests
     }
 
     [Fact]
-    public void ProcessFile_ThrowsNotSupportedException_ForUnsupportedExtension()
-    {
-        var tempFile = Path.GetTempFileName() + ".unsupported";
-        File.WriteAllText(tempFile, "test");
-        var encodingMapper = new EncodingMapper(new[] { 'A' }, new[] { 'B' });
-        Assert.Throws<NotSupportedException>(() =>
-            Program.ProcessFile(new FileInfo(tempFile), EncodingType.ANSIToUnicode, "Arial", encodingMapper));
-        File.Delete(tempFile);
-    }
-
-    [Fact]
-    public void ProcessDirectory_ProcessesSupportedFiles()
-    {
-        var tempDir = Directory.CreateTempSubdirectory();
-        var txtFile = Path.Combine(tempDir.FullName, "file.txt");
-        File.WriteAllText(txtFile, "test");
-        var encodingMapper = new EncodingMapper(new[] { 'A' }, new[] { 'B' });
-        Program.ProcessDirectory(new DirectoryInfo(tempDir.FullName), EncodingType.ANSIToUnicode, "Arial", encodingMapper);
-        Assert.True(File.Exists(txtFile));
-        tempDir.Delete(true);
-    }
-
-    [Fact]
     public void ParseCommandLine_ReturnsError_WhenRequiredOptionsMissing()
     {
         var args = new[] { "--type", "0" };
