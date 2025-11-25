@@ -5,8 +5,9 @@ using System.IO;
 using EC.CLI;
 using EC.Library.Converters;
 using EC.Library.Core;
-using Moq;
 using Xunit;
+
+namespace EC.CLI.Tests;
 
 public class ProgramTests
 {
@@ -34,10 +35,10 @@ public class ProgramTests
         var tempFile = Path.GetTempFileName() + ".unsupported";
         File.WriteAllText(tempFile, "test");
         var encodingMapper = new EncodingMapper(Array.Empty<char>(), Array.Empty<char>());
-        var wordMock = new Mock<WordConverter>(MockBehavior.Loose, new TextConverter(encodingMapper), true);
-        var excelMock = new Mock<ExcelConverter>(MockBehavior.Loose, new TextConverter(encodingMapper), true);
+        var wordConverter = new WordConverter( new TextConverter(encodingMapper), true);
+        var excelConverter = new ExcelConverter( new TextConverter(encodingMapper), true);
         Assert.Throws<NotSupportedException>(() =>
-            Program.ProcessFile(new FileInfo(tempFile), EncodingType.ANSIToUnicode, "Arial", wordMock.Object, excelMock.Object));
+            Program.ProcessFile(new FileInfo(tempFile), EncodingType.ANSIToUnicode, "Arial", wordConverter, excelConverter));
         File.Delete(tempFile);
     }
 
@@ -48,9 +49,9 @@ public class ProgramTests
         var txtFile = Path.Combine(tempDir.FullName, "file.txt");
         File.WriteAllText(txtFile, "test");
         var encodingMapper = new EncodingMapper(Array.Empty<char>(), Array.Empty<char>());
-        var wordMock = new Mock<WordConverter>(MockBehavior.Loose, new TextConverter(encodingMapper), true);
-        var excelMock = new Mock<ExcelConverter>(MockBehavior.Loose, new TextConverter(encodingMapper), true);
-        Program.ProcessDirectory(new DirectoryInfo(tempDir.FullName), EncodingType.ANSIToUnicode, "Arial", wordMock.Object, excelMock.Object);
+        var wordConverter = new WordConverter(new TextConverter(encodingMapper), true);
+        var excelConverter = new ExcelConverter(new TextConverter(encodingMapper), true);
+        Program.ProcessDirectory(new DirectoryInfo(tempDir.FullName), EncodingType.ANSIToUnicode, "Arial", wordConverter, excelConverter);
         Assert.True(File.Exists(txtFile));
         tempDir.Delete(true);
     }
