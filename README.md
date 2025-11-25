@@ -6,6 +6,17 @@
 
 The **Armenian Encoding Converter (EC)** is a .NET 9 application for converting Armenian text between encoding formats. It provides a core library, a command-line interface (CLI), a GUI (in progress), and unit tests.
 
+## Table of Contents
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Mapping File](#mapping-file)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
 ## Features
 
 - **Library (`EC.Library`)**:
