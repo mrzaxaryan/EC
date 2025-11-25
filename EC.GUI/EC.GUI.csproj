@@ -9,4 +9,9 @@
 	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EC.CLI\EC.CLI.csproj" />
+    <ProjectReference Include="..\EC.Library\EC.Library.csproj" />
+  </ItemGroup>
+
 </Project>
