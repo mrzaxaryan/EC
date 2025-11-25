@@ -79,9 +79,6 @@ internal class Program
             var mapFile = parseResult.GetValue(mapFileOption);
             ArgumentNullException.ThrowIfNull(mapFile);
             var encodingMapper = EncodingMapper.FromFile(mapFile.FullName);
-            var textConverter = new TextConverter(encodingMapper);
-            using var wordConverter = new WordConverter(textConverter, true);
-            using var excelConverter = new ExcelConverter(textConverter, true);
 
             var file = parseResult.GetValue(fileOption);
             var directory = parseResult.GetValue(directoryOption);
@@ -91,11 +88,11 @@ internal class Program
 
             if (file != null)
             {
-                ProcessFile(file, type, fontName, wordConverter, excelConverter);
+                ProcessFile(file, type, fontName, encodingMapper);
             }
             else if (directory != null)
             {
-                ProcessDirectory(directory, type, fontName, wordConverter, excelConverter);
+                ProcessDirectory(directory, type, fontName, encodingMapper);
             }
         }
         catch (Exception ex)
@@ -107,8 +104,12 @@ internal class Program
         return 0;
     }
 
-    internal static void ProcessFile(FileInfo file, EncodingType encodingType, string fontName, WordConverter wordConverter, ExcelConverter excelConverter)
+    internal static void ProcessFile(FileInfo file, EncodingType encodingType, string fontName, EncodingMapper encodingMapper)
     {
+        var textConverter = new TextConverter(encodingMapper);
+        using var wordConverter = new WordConverter(textConverter, true);
+        using var excelConverter = new ExcelConverter(textConverter, true);
+
         var extension = Path.GetExtension(file.FullName);
         if (WordExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
         {
@@ -124,7 +125,7 @@ internal class Program
         {
             Console.WriteLine($"Converting Text file: {file.FullName}");
             var content = File.ReadAllText(file.FullName);
-            var convertedContent = new TextConverter(EncodingMapper.FromFile(file.FullName)).Convert(content, encodingType);
+            var convertedContent = textConverter.Convert(content, encodingType);
             File.WriteAllText(file.FullName, convertedContent);
         }
         else
@@ -133,8 +134,12 @@ internal class Program
         }
     }
 
-    internal static void ProcessDirectory(DirectoryInfo directory, EncodingType encodingType, string fontName, WordConverter wordConverter, ExcelConverter excelConverter)
+    internal static void ProcessDirectory(DirectoryInfo directory, EncodingType encodingType, string fontName, EncodingMapper encodingMapper)
     {
+        var textConverter = new TextConverter(encodingMapper);
+        using var wordConverter = new WordConverter(textConverter, true);
+        using var excelConverter = new ExcelConverter(textConverter, true);
+
         var files = Directory.GetFiles(directory.FullName, "*.*", SearchOption.AllDirectories)
             .Where(f => SupportedExtensions.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase))
             .ToArray();
@@ -158,7 +163,7 @@ internal class Program
                 {
                     Console.WriteLine($"Converting Text file: {file}");
                     var content = File.ReadAllText(file);
-                    var convertedContent = new TextConverter(EncodingMapper.FromFile(file)).Convert(content, encodingType);
+                    var convertedContent = textConverter.Convert(content, encodingType);
                     File.WriteAllText(file, convertedContent);
                 }
             }

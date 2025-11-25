@@ -34,11 +34,9 @@ public class ProgramTests
     {
         var tempFile = Path.GetTempFileName() + ".unsupported";
         File.WriteAllText(tempFile, "test");
-        var encodingMapper = new EncodingMapper(Array.Empty<char>(), Array.Empty<char>());
-        var wordConverter = new WordConverter( new TextConverter(encodingMapper), true);
-        var excelConverter = new ExcelConverter( new TextConverter(encodingMapper), true);
+        var encodingMapper = new EncodingMapper(new[] { 'A' }, new[] { 'B' });
         Assert.Throws<NotSupportedException>(() =>
-            Program.ProcessFile(new FileInfo(tempFile), EncodingType.ANSIToUnicode, "Arial", wordConverter, excelConverter));
+            Program.ProcessFile(new FileInfo(tempFile), EncodingType.ANSIToUnicode, "Arial", encodingMapper));
         File.Delete(tempFile);
     }
 
@@ -48,11 +46,82 @@ public class ProgramTests
         var tempDir = Directory.CreateTempSubdirectory();
         var txtFile = Path.Combine(tempDir.FullName, "file.txt");
         File.WriteAllText(txtFile, "test");
-        var encodingMapper = new EncodingMapper(Array.Empty<char>(), Array.Empty<char>());
-        var wordConverter = new WordConverter(new TextConverter(encodingMapper), true);
-        var excelConverter = new ExcelConverter(new TextConverter(encodingMapper), true);
-        Program.ProcessDirectory(new DirectoryInfo(tempDir.FullName), EncodingType.ANSIToUnicode, "Arial", wordConverter, excelConverter);
+        var encodingMapper = new EncodingMapper(new[] { 'A' }, new[] { 'B' });
+        Program.ProcessDirectory(new DirectoryInfo(tempDir.FullName), EncodingType.ANSIToUnicode, "Arial", encodingMapper);
         Assert.True(File.Exists(txtFile));
         tempDir.Delete(true);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsError_WhenRequiredOptionsMissing()
+    {
+        var args = new[] { "--type", "0" };
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(1, result);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsError_WhenInvalidEncodingType()
+    {
+        var tempMap = Path.GetTempFileName();
+        var args = new[] { "--type", "99", "--map", tempMap, "--file", tempMap };
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(1, result);
+        File.Delete(tempMap);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsError_WhenFileAndDirectoryDoNotExist()
+    {
+        var tempMap = Path.GetTempFileName();
+        var args = new[] { "--type", "0", "--map", tempMap, "--file", "nofile.txt" };
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(1, result);
+        File.Delete(tempMap);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsError_WhenMapFileDoesNotExist()
+    {
+        var args = new[] { "--type", "0", "--map", "nofile.map", "--file", "nofile.txt" };
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(1, result);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsSuccess_ForValidFileConversion()
+    {
+        var tempMap = Path.GetTempFileName();
+        File.WriteAllText(tempMap, "A=B");
+        var tempFile = Path.GetTempFileName() + ".txt";
+        File.WriteAllText(tempFile, "A");
+        var args = new[] { "--type", "0", "--map", tempMap, "--file", tempFile };
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(0, result);
+        File.Delete(tempMap);
+        File.Delete(tempFile);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsSuccess_ForValidDirectoryConversion()
+    {
+        var tempMap = Path.GetTempFileName();
+        File.WriteAllText(tempMap, "A=B");
+        var tempDir = Directory.CreateTempSubdirectory();
+        var tempFile = Path.Combine(tempDir.FullName, "file.txt");
+        File.WriteAllText(tempFile, "A");
+        var args = new[] { "--type", "0", "--map", tempMap, "--directory", tempDir.FullName };
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(0, result);
+        File.Delete(tempMap);
+        tempDir.Delete(true);
+    }
+
+    [Fact]
+    public void ParseCommandLine_ReturnsError_WhenNoArgumentsProvided()
+    {
+        var args = Array.Empty<string>();
+        int result = Program.ParseCommandLine(args);
+        Assert.Equal(1, result);
     }
 }
