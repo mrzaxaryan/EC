@@ -19,7 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="armenian.map">
+    <Folder Include="Encodings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Encodings\armenian.map" Link="Encodings\armenian.map">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
