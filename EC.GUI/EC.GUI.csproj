@@ -2,26 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EC.CLI\EC.CLI.csproj" />
-    <ProjectReference Include="..\EC.Library\EC.Library.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Encodings\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\Encodings\armenian.map" Link="Encodings\armenian.map">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
 </Project>
