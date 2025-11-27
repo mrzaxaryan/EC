@@ -7,12 +7,24 @@ namespace EC.CLI;
 
 internal class Program
 {
+    static readonly string[] TextExtensions = [".txt"];
     static readonly string[] WordExtensions = [".doc", ".docx"];
     static readonly string[] ExcelExtensions = [".xls", ".xlsx"];
-    static readonly string[] SupportedExtensions = [.. WordExtensions, .. ExcelExtensions];
+    static readonly string[] SupportedExtensions = [.. TextExtensions, .. WordExtensions, .. ExcelExtensions];
 
     static int Main(string[] args)
     {
+       return ParseCommandLine(args);
+    }
+
+    internal static int ParseCommandLine(string[] args)
+    {
+        var mapFileOption = new Option<FileInfo>("--map", "-m")
+        {
+            Description = "Path to the encoding map file",
+            Required = true
+        };
+
         var fileOption = new Option<FileInfo?>("--file", "-f")
         {
             Description = "Path to the file to convert"
@@ -27,24 +39,31 @@ internal class Program
             Required = true
         };
 
+
         var rootCommand = new RootCommand("Encoding Converter CLI")
         {
+            mapFileOption,
             fileOption,
             directoryOption,
-            typeOption
+            typeOption,
         };
         rootCommand.Validators.Add(commandResult =>
         {
+            var mapFile = commandResult.GetValue(mapFileOption);
+            var type = commandResult.GetValue(typeOption);
             var file = commandResult.GetValue(fileOption);
             var directory = commandResult.GetValue(directoryOption);
-            if (file is null && directory is null)
+
+            if (mapFile is null || !mapFile.Exists)
+            {
+                commandResult.AddError("The specified map file does not exist.");
+            }
+
+            if (!(file is not null && file.Exists) && !(directory is not null && directory.Exists))
             {
                 commandResult.AddError("You must specify either --file or --directory.");
             }
-            else if (file is not null && directory is not null)
-            {
-                commandResult.AddError("You cannot specify both --file and --directory.");
-            }
+
         });
 
         var parseResult = rootCommand.Parse(args);
@@ -57,10 +76,9 @@ internal class Program
 
         try
         {
-            var encodingMapper = EncodingMapper.FromFile(@"..\..\..\..\Encodings\armenian.map");
-            var textConverter = new TextConverter(encodingMapper);
-            using var wordConverter = new WordConverter(textConverter, true);
-            using var excelConverter = new ExcelConverter(textConverter, true);
+            var mapFile = parseResult.GetValue(mapFileOption);
+            ArgumentNullException.ThrowIfNull(mapFile);
+            var encodingMapper = EncodingMapper.FromFile(mapFile.FullName);
 
             var file = parseResult.GetValue(fileOption);
             var directory = parseResult.GetValue(directoryOption);
@@ -70,11 +88,11 @@ internal class Program
 
             if (file != null)
             {
-                ProcessFile(file, type, fontName, wordConverter, excelConverter);
+                ProcessFile(file, type, fontName, encodingMapper);
             }
             else if (directory != null)
             {
-                ProcessDirectory(directory, type, fontName, wordConverter, excelConverter);
+                ProcessDirectory(directory, type, fontName, encodingMapper);
             }
         }
         catch (Exception ex)
@@ -86,8 +104,12 @@ internal class Program
         return 0;
     }
 
-    private static void ProcessFile(FileInfo file, EncodingType encodingType, string fontName, WordConverter wordConverter, ExcelConverter excelConverter)
+    internal static void ProcessFile(FileInfo file, EncodingType encodingType, string fontName, EncodingMapper encodingMapper)
     {
+        var textConverter = new TextConverter(encodingMapper);
+        using var wordConverter = new WordConverter(textConverter, true);
+        using var excelConverter = new ExcelConverter(textConverter, true);
+
         var extension = Path.GetExtension(file.FullName);
         if (WordExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
         {
@@ -99,14 +121,25 @@ internal class Program
             Console.WriteLine($"Converting Excel file: {file.FullName}");
             excelConverter.Convert(file.FullName, encodingType, fontName);
         }
+        else if (TextExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
+        {
+            Console.WriteLine($"Converting Text file: {file.FullName}");
+            var content = File.ReadAllText(file.FullName);
+            var convertedContent = textConverter.Convert(content, encodingType);
+            File.WriteAllText(file.FullName, convertedContent);
+        }
         else
         {
             throw new NotSupportedException($"Unsupported file type: {extension}");
         }
     }
 
-    private static void ProcessDirectory(DirectoryInfo directory, EncodingType encodingType, string fontName, WordConverter wordConverter, ExcelConverter excelConverter)
+    internal static void ProcessDirectory(DirectoryInfo directory, EncodingType encodingType, string fontName, EncodingMapper encodingMapper)
     {
+        var textConverter = new TextConverter(encodingMapper);
+        using var wordConverter = new WordConverter(textConverter, true);
+        using var excelConverter = new ExcelConverter(textConverter, true);
+
         var files = Directory.GetFiles(directory.FullName, "*.*", SearchOption.AllDirectories)
             .Where(f => SupportedExtensions.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase))
             .ToArray();
@@ -125,6 +158,13 @@ internal class Program
                 {
                     Console.WriteLine($"Converting Excel file: {file}");
                     excelConverter.Convert(file, encodingType, fontName);
+                }
+                else if (TextExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"Converting Text file: {file}");
+                    var content = File.ReadAllText(file);
+                    var convertedContent = textConverter.Convert(content, encodingType);
+                    File.WriteAllText(file, convertedContent);
                 }
             }
             catch (Exception ex)
