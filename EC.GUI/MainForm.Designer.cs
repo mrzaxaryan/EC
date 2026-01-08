@@ -3,37 +3,14 @@
     partial class MainForm
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        private System.Windows.Forms.Panel panelFile;
-        private System.Windows.Forms.Panel panelSettings;
-        private System.Windows.Forms.Panel panelActions;
-        private System.Windows.Forms.Panel panelLog;
-
-        private System.Windows.Forms.TextBox txtPath;
-        private System.Windows.Forms.Button btnBrowseFile;
-        private System.Windows.Forms.Button btnBrowseFolder;
-
-        private System.Windows.Forms.ComboBox comboEncoding;
-        private System.Windows.Forms.ComboBox comboFont;
-
-        private System.Windows.Forms.Button btnConvert;
-        private System.Windows.Forms.RichTextBox richLog;
-        private System.Windows.Forms.ProgressBar progressBar;
-
-        private System.Windows.Forms.Label lblPath;
-        private System.Windows.Forms.Label lblEncoding;
-        private System.Windows.Forms.Label lblFont;
-        private System.Windows.Forms.Label lblLogTitle;
-        private System.Windows.Forms.Label lblActionsTitle;
-        private System.Windows.Forms.Label lblSettingsTitle;
-        private System.Windows.Forms.Label lblFileTitle;
-
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -45,244 +22,284 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.panelFile = new System.Windows.Forms.Panel();
-            this.lblPath = new System.Windows.Forms.Label();
-            this.txtPath = new System.Windows.Forms.TextBox();
-            this.btnBrowseFile = new System.Windows.Forms.Button();
-            this.btnBrowseFolder = new System.Windows.Forms.Button();
-            this.lblFileTitle = new System.Windows.Forms.Label();
-
-            this.panelSettings = new System.Windows.Forms.Panel();
-            this.lblEncoding = new System.Windows.Forms.Label();
-            this.comboEncoding = new System.Windows.Forms.ComboBox();
-            this.lblFont = new System.Windows.Forms.Label();
-            this.comboFont = new System.Windows.Forms.ComboBox();
-            this.lblSettingsTitle = new System.Windows.Forms.Label();
-
-            this.panelActions = new System.Windows.Forms.Panel();
-            this.btnConvert = new System.Windows.Forms.Button();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.lblActionsTitle = new System.Windows.Forms.Label();
-
-            this.panelLog = new System.Windows.Forms.Panel();
-            this.richLog = new System.Windows.Forms.RichTextBox();
-            this.lblLogTitle = new System.Windows.Forms.Label();
-
-            this.SuspendLayout();
-
-            // === Общие настройки формы ===
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 600);
-            this.MinimumSize = new System.Drawing.Size(900, 600);
-            this.Name = "MainForm";
-            this.Text = "Encoding Converter GUI";
-
-            // тёмно-фиолетовая тема
-            this.BackColor = System.Drawing.Color.FromArgb(32, 32, 48);
-            this.ForeColor = System.Drawing.Color.Gainsboro;
-
-            // === panelFile ===
-            this.panelFile.BackColor = System.Drawing.Color.FromArgb(40, 40, 60);
-            this.panelFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelFile.Location = new System.Drawing.Point(12, 12);
-            this.panelFile.Name = "panelFile";
-            this.panelFile.Size = new System.Drawing.Size(876, 90);
-            this.panelFile.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                     | System.Windows.Forms.AnchorStyles.Left
-                                     | System.Windows.Forms.AnchorStyles.Right);
-
+            panelFile = new Panel();
+            lblFileTitle = new Label();
+            btnBrowseFolder = new Button();
+            btnBrowseFile = new Button();
+            txtPath = new TextBox();
+            lblPath = new Label();
+            panelSettings = new Panel();
+            btnTheme = new Button();
+            comboFont = new ComboBox();
+            lblFont = new Label();
+            comboEncoding = new ComboBox();
+            lblEncoding = new Label();
+            lblSettingsTitle = new Label();
+            panelActions = new Panel();
+            progressBar = new ProgressBar();
+            btnConvert = new Button();
+            lblActions = new Label();
+            panelLog = new Panel();
+            richLog = new RichTextBox();
+            lblLog = new Label();
+            panelFile.SuspendLayout();
+            panelSettings.SuspendLayout();
+            panelActions.SuspendLayout();
+            panelLog.SuspendLayout();
+            SuspendLayout();
+            // 
+            // panelFile
+            // 
+            panelFile.Controls.Add(lblFileTitle);
+            panelFile.Controls.Add(btnBrowseFolder);
+            panelFile.Controls.Add(btnBrowseFile);
+            panelFile.Controls.Add(txtPath);
+            panelFile.Controls.Add(lblPath);
+            panelFile.Dock = DockStyle.Top;
+            panelFile.Location = new Point(0, 0);
+            panelFile.Name = "panelFile";
+            panelFile.Size = new Size(812, 75);
+            panelFile.TabIndex = 0;
+            // 
             // lblFileTitle
-            this.lblFileTitle.AutoSize = true;
-            this.lblFileTitle.Location = new System.Drawing.Point(10, 8);
-            this.lblFileTitle.Name = "lblFileTitle";
-            this.lblFileTitle.Size = new System.Drawing.Size(64, 15);
-            this.lblFileTitle.Text = "File / Folder";
-
-            // lblPath
-            this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(10, 32);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(32, 15);
-            this.lblPath.Text = "Path";
-
-            // txtPath
-            this.txtPath.Location = new System.Drawing.Point(60, 29);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(620, 23);
-            this.txtPath.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                   | System.Windows.Forms.AnchorStyles.Left
-                                   | System.Windows.Forms.AnchorStyles.Right);
-
-            // btnBrowseFile
-            this.btnBrowseFile.Location = new System.Drawing.Point(690, 28);
-            this.btnBrowseFile.Name = "btnBrowseFile";
-            this.btnBrowseFile.Size = new System.Drawing.Size(80, 25);
-            this.btnBrowseFile.Text = "File...";
-            this.btnBrowseFile.UseVisualStyleBackColor = true;
-            this.btnBrowseFile.Click += new System.EventHandler(this.btnBrowseFile_Click);
-            this.btnBrowseFile.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                         | System.Windows.Forms.AnchorStyles.Right);
-
+            // 
+            lblFileTitle.AutoSize = true;
+            lblFileTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFileTitle.Location = new Point(10, 8);
+            lblFileTitle.Name = "lblFileTitle";
+            lblFileTitle.Size = new Size(72, 15);
+            lblFileTitle.TabIndex = 5;
+            lblFileTitle.Text = "File / Folder";
+            // 
             // btnBrowseFolder
-            this.btnBrowseFolder.Location = new System.Drawing.Point(780, 28);
-            this.btnBrowseFolder.Name = "btnBrowseFolder";
-            this.btnBrowseFolder.Size = new System.Drawing.Size(80, 25);
-            this.btnBrowseFolder.Text = "Folder...";
-            this.btnBrowseFolder.UseVisualStyleBackColor = true;
-            this.btnBrowseFolder.Click += new System.EventHandler(this.btnBrowseFolder_Click);
-            this.btnBrowseFolder.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                           | System.Windows.Forms.AnchorStyles.Right);
-
-            this.panelFile.Controls.Add(this.lblFileTitle);
-            this.panelFile.Controls.Add(this.lblPath);
-            this.panelFile.Controls.Add(this.txtPath);
-            this.panelFile.Controls.Add(this.btnBrowseFile);
-            this.panelFile.Controls.Add(this.btnBrowseFolder);
-
-            // === panelSettings ===
-            this.panelSettings.BackColor = System.Drawing.Color.FromArgb(40, 40, 60);
-            this.panelSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelSettings.Location = new System.Drawing.Point(12, 110);
-            this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(876, 80);
-            this.panelSettings.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                         | System.Windows.Forms.AnchorStyles.Left
-                                         | System.Windows.Forms.AnchorStyles.Right);
-
-            // lblSettingsTitle
-            this.lblSettingsTitle.AutoSize = true;
-            this.lblSettingsTitle.Location = new System.Drawing.Point(10, 8);
-            this.lblSettingsTitle.Name = "lblSettingsTitle";
-            this.lblSettingsTitle.Size = new System.Drawing.Size(51, 15);
-            this.lblSettingsTitle.Text = "Settings";
-
-            // lblEncoding
-            this.lblEncoding.AutoSize = true;
-            this.lblEncoding.Location = new System.Drawing.Point(10, 35);
-            this.lblEncoding.Name = "lblEncoding";
-            this.lblEncoding.Size = new System.Drawing.Size(58, 15);
-            this.lblEncoding.Text = "Encoding";
-
-            // comboEncoding
-            this.comboEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboEncoding.Location = new System.Drawing.Point(80, 32);
-            this.comboEncoding.Name = "comboEncoding";
-            this.comboEncoding.Size = new System.Drawing.Size(200, 23);
-            this.comboEncoding.Items.AddRange(new object[]
-            {
-                "ANSI → Unicode",
-                "Unicode → ANSI"
-            });
-
-            // lblFont
-            this.lblFont.AutoSize = true;
-            this.lblFont.Location = new System.Drawing.Point(310, 35);
-            this.lblFont.Name = "lblFont";
-            this.lblFont.Size = new System.Drawing.Size(31, 15);
-            this.lblFont.Text = "Font";
-
+            // 
+            btnBrowseFolder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnBrowseFolder.Location = new Point(740, 25);
+            btnBrowseFolder.Name = "btnBrowseFolder";
+            btnBrowseFolder.Size = new Size(60, 25);
+            btnBrowseFolder.TabIndex = 3;
+            btnBrowseFolder.Text = "Folder";
+            btnBrowseFolder.UseVisualStyleBackColor = true;
+            btnBrowseFolder.Click += btnBrowseFolder_Click;
+            // 
+            // btnBrowseFile
+            // 
+            btnBrowseFile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnBrowseFile.Location = new Point(674, 25);
+            btnBrowseFile.Name = "btnBrowseFile";
+            btnBrowseFile.Size = new Size(60, 25);
+            btnBrowseFile.TabIndex = 2;
+            btnBrowseFile.Text = "File";
+            btnBrowseFile.UseVisualStyleBackColor = true;
+            btnBrowseFile.Click += btnBrowseFile_Click;
+            // 
+            // txtPath
+            // 
+            txtPath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtPath.Location = new Point(60, 27);
+            txtPath.Name = "txtPath";
+            txtPath.Size = new Size(608, 23);
+            txtPath.TabIndex = 1;
+            // 
+            // lblPath
+            // 
+            lblPath.AutoSize = true;
+            lblPath.Location = new Point(10, 30);
+            lblPath.Name = "lblPath";
+            lblPath.Size = new Size(31, 15);
+            lblPath.TabIndex = 0;
+            lblPath.Text = "Path";
+            // 
+            // panelSettings
+            // 
+            panelSettings.Controls.Add(btnTheme);
+            panelSettings.Controls.Add(comboFont);
+            panelSettings.Controls.Add(lblFont);
+            panelSettings.Controls.Add(comboEncoding);
+            panelSettings.Controls.Add(lblEncoding);
+            panelSettings.Controls.Add(lblSettingsTitle);
+            panelSettings.Location = new Point(0, 81);
+            panelSettings.Name = "panelSettings";
+            panelSettings.Size = new Size(812, 89);
+            panelSettings.TabIndex = 1;
+            // 
+            // btnTheme
+            // 
+            btnTheme.Anchor = AnchorStyles.Right;
+            btnTheme.Location = new Point(674, 32);
+            btnTheme.Name = "btnTheme";
+            btnTheme.Size = new Size(126, 25);
+            btnTheme.TabIndex = 5;
+            btnTheme.Text = "Theme";
+            btnTheme.UseVisualStyleBackColor = true;
+            // 
             // comboFont
-            this.comboFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFont.Location = new System.Drawing.Point(350, 32);
-            this.comboFont.Name = "comboFont";
-            this.comboFont.Size = new System.Drawing.Size(200, 23);
-            this.comboFont.Items.AddRange(new object[]
-            {
-                "Sylfaen",
-                "Arial",
-                "Calibri",
-                "Times New Roman"
-            });
-
-            this.panelSettings.Controls.Add(this.lblSettingsTitle);
-            this.panelSettings.Controls.Add(this.lblEncoding);
-            this.panelSettings.Controls.Add(this.comboEncoding);
-            this.panelSettings.Controls.Add(this.lblFont);
-            this.panelSettings.Controls.Add(this.comboFont);
-
-            // === panelActions ===
-            this.panelActions.BackColor = System.Drawing.Color.FromArgb(40, 40, 60);
-            this.panelActions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelActions.Location = new System.Drawing.Point(12, 198);
-            this.panelActions.Name = "panelActions";
-            this.panelActions.Size = new System.Drawing.Size(876, 80);
-            this.panelActions.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                         | System.Windows.Forms.AnchorStyles.Left
-                                         | System.Windows.Forms.AnchorStyles.Right);
-
-            // lblActionsTitle
-            this.lblActionsTitle.AutoSize = true;
-            this.lblActionsTitle.Location = new System.Drawing.Point(10, 8);
-            this.lblActionsTitle.Name = "lblActionsTitle";
-            this.lblActionsTitle.Size = new System.Drawing.Size(48, 15);
-            this.lblActionsTitle.Text = "Actions";
-
-            // btnConvert
-            this.btnConvert.Location = new System.Drawing.Point(10, 34);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(120, 30);
-            this.btnConvert.Text = "Convert";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.btnConvert_Click);
-
+            // 
+            comboFont.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboFont.FormattingEnabled = true;
+            comboFont.Location = new Point(340, 32);
+            comboFont.Name = "comboFont";
+            comboFont.Size = new Size(180, 23);
+            comboFont.TabIndex = 4;
+            // 
+            // lblFont
+            // 
+            lblFont.AutoSize = true;
+            lblFont.Location = new Point(300, 35);
+            lblFont.Name = "lblFont";
+            lblFont.Size = new Size(31, 15);
+            lblFont.TabIndex = 3;
+            lblFont.Text = "Font";
+            // 
+            // comboEncoding
+            // 
+            comboEncoding.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboEncoding.FormattingEnabled = true;
+            comboEncoding.Location = new Point(91, 32);
+            comboEncoding.Name = "comboEncoding";
+            comboEncoding.Size = new Size(189, 23);
+            comboEncoding.TabIndex = 2;
+            // 
+            // lblEncoding
+            // 
+            lblEncoding.AutoSize = true;
+            lblEncoding.Location = new Point(10, 35);
+            lblEncoding.Name = "lblEncoding";
+            lblEncoding.Size = new Size(57, 15);
+            lblEncoding.TabIndex = 1;
+            lblEncoding.Text = "Encoding";
+            // 
+            // lblSettingsTitle
+            // 
+            lblSettingsTitle.AutoSize = true;
+            lblSettingsTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSettingsTitle.Location = new Point(10, 8);
+            lblSettingsTitle.Name = "lblSettingsTitle";
+            lblSettingsTitle.Size = new Size(53, 15);
+            lblSettingsTitle.TabIndex = 0;
+            lblSettingsTitle.Text = "Settings";
+            // 
+            // panelActions
+            // 
+            panelActions.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            panelActions.Controls.Add(progressBar);
+            panelActions.Controls.Add(btnConvert);
+            panelActions.Controls.Add(lblActions);
+            panelActions.Location = new Point(0, 176);
+            panelActions.Name = "panelActions";
+            panelActions.Size = new Size(812, 75);
+            panelActions.TabIndex = 2;
+            // 
             // progressBar
-            this.progressBar.Location = new System.Drawing.Point(150, 39);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(710, 20);
-            this.progressBar.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                       | System.Windows.Forms.AnchorStyles.Left
-                                       | System.Windows.Forms.AnchorStyles.Right);
-
-            this.panelActions.Controls.Add(this.lblActionsTitle);
-            this.panelActions.Controls.Add(this.btnConvert);
-            this.panelActions.Controls.Add(this.progressBar);
-
-            // === panelLog ===
-            this.panelLog.BackColor = System.Drawing.Color.FromArgb(40, 40, 60);
-            this.panelLog.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelLog.Location = new System.Drawing.Point(12, 286);
-            this.panelLog.Name = "panelLog";
-            this.panelLog.Size = new System.Drawing.Size(876, 302);
-            this.panelLog.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                     | System.Windows.Forms.AnchorStyles.Bottom
-                                     | System.Windows.Forms.AnchorStyles.Left
-                                     | System.Windows.Forms.AnchorStyles.Right);
-
-            // lblLogTitle
-            this.lblLogTitle.AutoSize = true;
-            this.lblLogTitle.Location = new System.Drawing.Point(10, 8);
-            this.lblLogTitle.Name = "lblLogTitle";
-            this.lblLogTitle.Size = new System.Drawing.Size(28, 15);
-            this.lblLogTitle.Text = "Log";
-
+            // 
+            progressBar.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            progressBar.Location = new Point(91, 35);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(709, 23);
+            progressBar.TabIndex = 2;
+            // 
+            // btnConvert
+            // 
+            btnConvert.Location = new Point(10, 35);
+            btnConvert.Name = "btnConvert";
+            btnConvert.Size = new Size(75, 23);
+            btnConvert.TabIndex = 1;
+            btnConvert.Text = "Convert";
+            btnConvert.UseVisualStyleBackColor = true;
+            btnConvert.Click += btnConvert_Click;
+            // 
+            // lblActions
+            // 
+            lblActions.AutoSize = true;
+            lblActions.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblActions.Location = new Point(10, 8);
+            lblActions.Name = "lblActions";
+            lblActions.Size = new Size(48, 15);
+            lblActions.TabIndex = 0;
+            lblActions.Text = "Actions";
+            // 
+            // panelLog
+            // 
+            panelLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelLog.Controls.Add(richLog);
+            panelLog.Controls.Add(lblLog);
+            panelLog.Location = new Point(0, 257);
+            panelLog.Name = "panelLog";
+            panelLog.Size = new Size(812, 194);
+            panelLog.TabIndex = 3;
+            // 
             // richLog
-            this.richLog.Location = new System.Drawing.Point(10, 28);
-            this.richLog.Name = "richLog";
-            this.richLog.Size = new System.Drawing.Size(856, 262);
-            this.richLog.ReadOnly = true;
-            this.richLog.BackColor = System.Drawing.Color.FromArgb(24, 24, 36);
-            this.richLog.ForeColor = System.Drawing.Color.Gainsboro;
-            this.richLog.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                                   | System.Windows.Forms.AnchorStyles.Bottom
-                                   | System.Windows.Forms.AnchorStyles.Left
-                                   | System.Windows.Forms.AnchorStyles.Right);
-
-            this.panelLog.Controls.Add(this.lblLogTitle);
-            this.panelLog.Controls.Add(this.richLog);
-
-            // === Добавляем панели на форму ===
-            this.Controls.Add(this.panelFile);
-            this.Controls.Add(this.panelSettings);
-            this.Controls.Add(this.panelActions);
-            this.Controls.Add(this.panelLog);
-
-            this.ResumeLayout(false);
+            // 
+            richLog.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richLog.Location = new Point(10, 30);
+            richLog.Name = "richLog";
+            richLog.ScrollBars = RichTextBoxScrollBars.Vertical;
+            richLog.Size = new Size(790, 151);
+            richLog.TabIndex = 1;
+            richLog.Text = "";
+            // 
+            // lblLog
+            // 
+            lblLog.AutoSize = true;
+            lblLog.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLog.Location = new Point(10, 8);
+            lblLog.Name = "lblLog";
+            lblLog.Size = new Size(27, 15);
+            lblLog.TabIndex = 0;
+            lblLog.Text = "Log";
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(812, 450);
+            Controls.Add(panelLog);
+            Controls.Add(panelActions);
+            Controls.Add(panelSettings);
+            Controls.Add(panelFile);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MinimizeBox = false;
+            Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Encoding Converter GUI";
+            panelFile.ResumeLayout(false);
+            panelFile.PerformLayout();
+            panelSettings.ResumeLayout(false);
+            panelSettings.PerformLayout();
+            panelActions.ResumeLayout(false);
+            panelActions.PerformLayout();
+            panelLog.ResumeLayout(false);
+            panelLog.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel panelFile;
+        private Label lblPath;
+        private TextBox txtPath;
+        private Button btnBrowseFile;
+        private Button btnBrowseFolder;
+        private Label lblFileTitle;
+        private Panel panelSettings;
+        private ComboBox comboEncoding;
+        private Label lblEncoding;
+        private Label lblSettingsTitle;
+        private Button btnTheme;
+        private ComboBox comboFont;
+        private Label lblFont;
+        private Panel panelActions;
+        private Button btnConvert;
+        private Label lblActions;
+        private ProgressBar progressBar;
+        private Panel panelLog;
+        private RichTextBox richLog;
+        private Label lblLog;
     }
 }
