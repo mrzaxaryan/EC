@@ -1,6 +1,10 @@
 # [[EC] Armenian Encoding Converter](https://github.com/mrzaxaryan/EC)
 
 [![Build Status](https://github.com/mrzaxaryan/EC/actions/workflows/dotnet.yml/badge.svg)](https://github.com/mrzaxaryan/EC/actions)
+![.NET 9](https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![Armenian](https://img.shields.io/badge/%D5%80%D5%A1%D5%B5%D5%A5%D6%80%D5%A5%D5%B6-Armenian-orange?style=for-the-badge)
 
 ## Overview
 
